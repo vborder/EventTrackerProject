@@ -5,15 +5,15 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema SleepTracker
+-- Schema sleeptracker
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `SleepTracker` ;
+DROP SCHEMA IF EXISTS `sleeptracker` ;
 
 -- -----------------------------------------------------
--- Schema SleepTracker
+-- Schema sleeptracker
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `SleepTracker` DEFAULT CHARACTER SET utf8 ;
-USE `SleepTracker` ;
+CREATE SCHEMA IF NOT EXISTS `sleeptracker` DEFAULT CHARACTER SET utf8 ;
+USE `sleeptracker` ;
 
 -- -----------------------------------------------------
 -- Table `sleep`
@@ -41,7 +41,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Data for table `sleep`
 -- -----------------------------------------------------
 START TRANSACTION;
-USE `SleepTracker`;
+USE `sleeptracker`;
 INSERT INTO `sleep` (`id`, `name`) VALUES (1, 'test');
 
 COMMIT;
