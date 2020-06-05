@@ -8,6 +8,16 @@ TODO: Sleep and stuff
 
 ## API Endpoints
 
-| Returns| Verb      | URI    | Description  |
-|--------|-----------|--------|--------------|
-|        |           |        |              |
+| Returns | Verb      | URI    | Description  |
+|---------|-----------|--------|--------------|
+|         |           |        |              |
+
+
+## Technologies Used
+* MySQL, MySQL Workbench
+* JPA/Hibernate
+* Spring Boot
+* Spring Data JPA
+* Git/Github
+
+## Lessons Learned
