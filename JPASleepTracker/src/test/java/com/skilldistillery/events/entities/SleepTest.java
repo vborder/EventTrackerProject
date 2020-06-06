@@ -46,7 +46,10 @@ class SleepTest {
 	@DisplayName("initial mapping test")
 	void test1() {
 		assertNotNull(sleep);
-		assertEquals("test", sleep.getName());
+		assertEquals(1, sleep.getId());
+		assertNotNull(sleep.getStartSleepTime());
+		assertNotNull(sleep.getEndSleepTime());
+		assertEquals(true, sleep.isEnabled());
 	}
 
 }
