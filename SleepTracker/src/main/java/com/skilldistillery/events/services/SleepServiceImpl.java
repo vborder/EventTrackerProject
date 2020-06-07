@@ -19,6 +19,10 @@ public class SleepServiceImpl implements SleepService {
 	public List<Sleep> findAllSleep() {
 		return repo.findAll();
 	}
+	
+//	public List<Sleep> findEnabledSleep() {
+//		return repo.findEnabledSleep(true);
+//	}
 
 	@Override
 	public Sleep findSleepById(int sleepId) {
@@ -33,8 +37,21 @@ public class SleepServiceImpl implements SleepService {
 
 	@Override
 	public Sleep update(int sleepId, Sleep sleep) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Sleep> sleepOpt = repo.findById(sleepId);
+		
+		Sleep updatedSleep = null;
+		
+		if (sleepOpt.isPresent()) {
+			updatedSleep = sleepOpt.get();
+			updatedSleep.setSleepLocationTemp(sleep.getSleepLocationTemp());
+			updatedSleep.setStartSleepTime(sleep.getStartSleepTime());
+			updatedSleep.setEndSleepTime(sleep.getEndSleepTime());
+			updatedSleep.setWakingRestfulness(sleep.getWakingRestfulness());
+			repo.saveAndFlush(updatedSleep);
+			
+		}
+		
+		return updatedSleep;
 	}
 
 	@Override
