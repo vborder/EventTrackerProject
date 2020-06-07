@@ -79,7 +79,7 @@ public class Sleep {
 		this.endSleepTime = endSleepTime;
 	}
 
-	public int getWakingRestfulness() {
+	public Integer getWakingRestfulness() {
 		return wakingRestfulness;
 	}
 

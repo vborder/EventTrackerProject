@@ -18,6 +18,7 @@ TODO: Sleep and stuff
 * JPA/Hibernate
 * Spring Boot
 * Spring Data JPA
+* Postman
 * Git/Github
 
 ## Lessons Learned
