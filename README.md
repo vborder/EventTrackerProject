@@ -4,7 +4,7 @@
 
 ## Overview
 
-SleepTracker is a Spring REST CRUD application that tracks a users sleeping hours and quality. Factors that influence sleep quality can be stored by the user, such as restfulness upon waking, temperature of the room being slept in, and length of sleep.
+SleepTracker is a Spring REST CRUD API that tracks a user's sleeping hours and quality. Factors that influence sleep quality can be stored by the user, such as restfulness upon waking, temperature of the room being slept in, and length of sleep. Eventually I would like to be able to develop correlations in the user's data to determine optimal sleep quality parameters that could be used to improve the user's overall sleep quality.
 
 ## API Endpoints
 
@@ -14,7 +14,7 @@ SleepTracker is a Spring REST CRUD application that tracks a users sleeping hour
 |---------|-----------|---------------------------|--------------------------------------|
 | Sleep   | GET       | api/sleeplist/{sleepId}   | Gets specific sleep session by ID    |
 |---------|-----------|---------------------------|--------------------------------------|
-| Sleep   | PUT       | api/sleeplist/{sleepId}   | Updates existing sleep session       |  
+| Sleep   | PUT       | api/sleeplist/{sleepId}   | Updates existing sleep session by ID |  
 |---------|-----------|---------------------------|--------------------------------------|
 | Sleep   | POST      | api/sleeplist             | Creates new sleep session            |
 |---------|-----------|---------------------------|--------------------------------------|
@@ -28,7 +28,8 @@ SleepTracker is a Spring REST CRUD application that tracks a users sleeping hour
 * Spring Data JPA
 * Postman
 * Gradle
-* JUnit
+* J-Unit
 * Git/Github
+* Atom
 
 ## Lessons Learned
