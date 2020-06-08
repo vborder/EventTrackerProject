@@ -22,7 +22,11 @@ DROP TABLE IF EXISTS `sleep` ;
 
 CREATE TABLE IF NOT EXISTS `sleep` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
+  `sleep_location_temp` DECIMAL(9,2) NULL,
+  `start_sleep_time` DATETIME NOT NULL,
+  `end_sleep_time` DATETIME NULL,
+  `restfulness_upon_waking` INT NULL,
+  `enabled` TINYINT NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -42,7 +46,17 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `sleeptracker`;
-INSERT INTO `sleep` (`id`, `name`) VALUES (1, 'test');
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (1, 66.4, '2020-05-24 23:00:00', '2020-05-25 08:32:00', 4, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (2, 72.1, '2020-05-25 23:18:00', '2020-05-26 07:14:00', 3, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (3, 70.3, '2020-05-26 22:13:00', '2020-05-27 09:12:00', 4, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (4, 67.8, '2020-05-27 22:56:00', '2020-05-28 06:20:00', 4, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (5, 66.4, '2020-05-28 23:47:00', '2020-05-29 08:42:00', 5, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (6, 64.2, '2020-05-29 23:02:00', '2020-05-30 07:18:00', 3, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (7, 68.3, '2020-05-31 00:18:00', '2020-05-31 09:40:00', 3, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (8, 68.5, '2020-06-01 22:11:00', '2020-06-02 06:33:00', 2, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (9, 69.2, '2020-06-02 23:08:00', '2020-06-03 08:11:00', 4, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (10, 66.2, '2020-06-03 23:33:00', '2020-06-04 08:22:00', 4, 1);
+INSERT INTO `sleep` (`id`, `sleep_location_temp`, `start_sleep_time`, `end_sleep_time`, `restfulness_upon_waking`, `enabled`) VALUES (11, 66.2, '2020-06-04 23:28:00', '2020-06-05 08:53:00', 3, 1);
 
 COMMIT;
 
