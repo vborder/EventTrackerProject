@@ -21,10 +21,11 @@ public class Sleep {
 	private Double sleepLocationTemp;
 	
 	@Column(name="start_sleep_time")
-	@CreationTimestamp
+//	@CreationTimestamp
 	private LocalDateTime startSleepTime;
 	
 	@Column(name="end_sleep_time")
+//	@CreationTimestamp
 	private LocalDateTime endSleepTime;
 	
 	@Column(name="restfulness_upon_waking")

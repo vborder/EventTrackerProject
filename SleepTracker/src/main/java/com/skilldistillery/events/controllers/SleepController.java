@@ -21,69 +21,65 @@ import com.skilldistillery.events.services.SleepService;
 @RestController
 @RequestMapping("api")
 public class SleepController {
-	
+
 	@GetMapping("ping")
 	public String ping() {
 		return "pong";
 	}
-	
+
 	@Autowired
 	private SleepService sleepSvc;
-	
+
 	@GetMapping("sleeplist")
 	public List<Sleep> index() {
 		return sleepSvc.findAllSleep();
 	}
-	
+
 	@GetMapping("sleeplist/{sleepId}")
 	public Sleep findById(@PathVariable Integer sleepId) {
 		return sleepSvc.findSleepById(sleepId);
 	}
-	
+
 	@PostMapping("sleeplist")
-	public Sleep create(@RequestBody Sleep sleep, HttpServletResponse response,
-			HttpServletRequest request
-			) {
-		sleep = sleepSvc.create(sleep);
+	public Sleep create(@RequestBody Sleep sleep, HttpServletResponse response, HttpServletRequest request) {
 		
-		if (sleep == null) {
-			response.setStatus(404);
-		}
-		else {
+		try {
+			sleep = sleepSvc.create(sleep);
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(sleep.getId());
 			response.setHeader("location", url.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(404);
+			sleep = null;
 		}
-		
+
 		return sleep;
 	}
-	
+
 	@PutMapping("sleeplist/{sleepId}")
-	public Sleep update(@PathVariable int sleepId, @RequestBody Sleep sleep, 
-			HttpServletResponse response
-		) {
-			try {
-				sleep = sleepSvc.update(sleepId, sleep);
-				if (sleep == null) {
-					response.setStatus(404);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				response.setStatus(400);
-				sleep = null;
+	public Sleep update(@PathVariable int sleepId, @RequestBody Sleep sleep, HttpServletResponse response) {
+		try {
+			sleep = sleepSvc.update(sleepId, sleep);
+			if (sleep == null) {
+				response.setStatus(404);
 			}
-		
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			sleep = null;
+		}
+
 		return sleep;
 	}
-	
+
 	@DeleteMapping("sleeplist/{sleepId}")
 	public void deleteById(@PathVariable Integer sleepId, HttpServletResponse response) {
-		
+
 		if (sleepSvc.deleteById(sleepId)) {
 			response.setStatus(204);
-		}
-		else {
+		} else {
 			response.setStatus(404);
 		}
 	}
