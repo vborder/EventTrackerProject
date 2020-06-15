@@ -161,6 +161,7 @@ function displaySleep(sleep) {
 
 function dynamicForm(sleep) {
 	console.log('dynamicForm called')
+	console.log(sleep);
 	var form = document.createElement('form');
 	form.name = 'updatedSleepForm';
 	
@@ -211,8 +212,7 @@ function dynamicForm(sleep) {
 	formSubmit.addEventListener('click', function(e) {
 		e.preventDefault();
 		var form = e.target.parentElement;
-//		updateSleepEntry(sleepId);
-		putSleepEntry(sleepId, sleep);
+		updateSleepEntry(sleepId.value);
 		form.reset();
 	});
 	
@@ -353,25 +353,25 @@ function populateSleepTable(allSleepEntries) {
 
 function updateSleepEntry(sleepId) {
 	console.log('in updateSleepEntry');
-	let form = document.updatedSleepForm;
+//	let form = document.updatedSleepForm;
 	let updatedEntry = {};
-	updatedEntry.sleepId = form.sleepId.value;
-	updatedEntry.startSleepTime = form.startSleepTime.value;
-	updatedEntry.endSleepTime = form.endSleepTime.value;
-	updatedEntry.sleepLocationTemp = form.sleepLocationTemp.value;
-	updatedEntry.wakingRestfulness = form.wakingRestfulness.value;
-	updatedEntry.enabled = form.enabled.value;
+	updatedEntry.sleepId = sleepId;
+	updatedEntry.startSleepTime = updatedSleepForm.startSleepTime.value;
+	updatedEntry.endSleepTime = updatedSleepForm.endSleepTime.value;
+	updatedEntry.sleepLocationTemp = updatedSleepForm.sleepLocationTemp.value;
+	updatedEntry.wakingRestfulness = updatedSleepForm.wakingRestfulness.value;
+//	updatedEntry.enabled = updatedSleepForm.enabled.value;
 	console.log(updatedEntry);
 	putSleepEntry(sleepId, updatedEntry);
 }
 
-function putSleepEntry(sleepId, sleep) {
+function putSleepEntry(sleepId, updatedEntry) {
 	console.log('in putSleepEntry');
-	console.log(sleepId);
+	console.log(updatedEntry);
 	let xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'api/sleeplist/' + sleepId);
 	xhr.setRequestHeader('Content-type', 'application/json');
-	let convertedSleepUpdate = JSON.stringify(sleep);
+	let convertedSleepUpdate = JSON.stringify(updatedEntry);
 	console.log(convertedSleepUpdate);
 	
 	xhr.onreadystatechange = function() {
@@ -383,9 +383,9 @@ function putSleepEntry(sleepId, sleep) {
 				getAllSleep();
 				console.log('should be displayed');
 			}
-		} 
-		else {
-			console.log("The update was unsuccessful.");
+			else {
+				console.log("The update was unsuccessful.");
+			}
 		}
 	};
 	xhr.send(convertedSleepUpdate);
@@ -397,7 +397,7 @@ function deleteSleepEntry(sleepId) {
 	xhr.open('DELETE', 'api/sleeplist/' + sleepId);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
-			console.log('loud and clear');
+			console.log('delete loud and clear');
 			if (xhr.status === 204) {
 				console.log('status good');
 				populateSleepTable(allSleepEntries);
