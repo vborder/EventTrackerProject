@@ -126,7 +126,7 @@ function displaySleep(sleep) {
 	});
 	
 	dynamicForm(sleep);
-	
+//	updateSleepEntry(sleep.id);
 	
 	console.log('dynamicForm called');
 	console.log('deleteButton called');
@@ -164,34 +164,44 @@ function dynamicForm(sleep) {
 	var form = document.createElement('form');
 	form.name = 'updatedSleepForm';
 	
+	var sleepId = document.createElement('input');
+	sleepId.name = 'sleepId';
+	sleepId.type = 'hidden';
+	sleepId.value = sleep.id;
+	console.log(sleepId.value);
+	form.appendChild(sleepId);
+	
 	var dynHeading = document.createElement('h3');
 	dynHeading.textContent = 'Update this entry';
 	form.appendChild(dynHeading);
-	var br = document.createElement('br');
 		
 	var startSleepTime = document.createElement('input');
 	startSleepTime.name = 'startSleepTime';
 	startSleepTime.type = 'text';
 	startSleepTime.placeholder = 'start sleep time';
 	form.appendChild(startSleepTime);
+	form.appendChild(document.createElement('br'));
 	
 	var endSleepTime = document.createElement('input');
 	endSleepTime.name = 'endSleepTime';
 	endSleepTime.type = 'text';
 	endSleepTime.placeholder = 'end sleep time';
 	form.appendChild(endSleepTime);
+	form.appendChild(document.createElement('br'));
 	
 	var sleepLocationTemp = document.createElement('input');
 	sleepLocationTemp.name = 'sleepLocationTemp';
 	sleepLocationTemp.type = 'number';
 	sleepLocationTemp.placeholder = 'room temperature';
 	form.appendChild(sleepLocationTemp);
+	form.appendChild(document.createElement('br'));
 	
 	var wakingRestfulness = document.createElement('input');
 	wakingRestfulness.name = 'wakingRestfulness';
 	wakingRestfulness.type = 'number';
-	wakingRestfulness.placeholder = 'from 1-5';
+	wakingRestfulness.placeholder = 'rate from 1-5';
 	form.appendChild(wakingRestfulness);
+	form.appendChild(document.createElement('br'));
 	
 	var formSubmit = document.createElement('input');
 	formSubmit.name = 'submit';
@@ -201,8 +211,8 @@ function dynamicForm(sleep) {
 	formSubmit.addEventListener('click', function(e) {
 		e.preventDefault();
 		var form = e.target.parentElement;
-		console.log(form.startSleepTime.value);
-		updateSleepEntry(sleep);
+//		updateSleepEntry(sleepId);
+		putSleepEntry(sleepId, sleep);
 		form.reset();
 	});
 	
@@ -210,7 +220,6 @@ function dynamicForm(sleep) {
 	document.body.appendChild(form);
 	
 }
-
 
 function displayError(message) {
 	var dataDiv = document.getElementById('sleepData');
@@ -278,10 +287,7 @@ function populateSleepTable(allSleepEntries) {
 	divSleepTable.appendChild(sleepTable);
 	let sleepRow = document.createElement('tr');
 	divSleepTable.appendChild(sleepRow);
-	// let sleepHeadingMain = document.createElement('th');
-	// divSleepTable.appendChild(sleepHeadingMain);
-	// divSleepTable.appendChild(sleepRow);
-	// sleepHeadingMain.textContent = 'All Sleep Entries';
+
 	let sleepHeadingId = document.createElement('th');
 	sleepHeadingId.textContent = 'ID';
 	divSleepTable.appendChild(sleepHeadingId);
@@ -345,7 +351,7 @@ function populateSleepTable(allSleepEntries) {
 
 }
 
-function updateSleepEntry() {
+function updateSleepEntry(sleepId) {
 	console.log('in updateSleepEntry');
 	let form = document.updatedSleepForm;
 	let updatedEntry = {};
@@ -356,16 +362,18 @@ function updateSleepEntry() {
 	updatedEntry.wakingRestfulness = form.wakingRestfulness.value;
 	updatedEntry.enabled = form.enabled.value;
 	console.log(updatedEntry);
-	console.lo
-	putSleepEntry(updatedEntry);
+	putSleepEntry(sleepId, updatedEntry);
 }
 
-function putSleepEntry(sleep) {
+function putSleepEntry(sleepId, sleep) {
 	console.log('in putSleepEntry');
+	console.log(sleepId);
 	let xhr = new XMLHttpRequest();
 	xhr.open('PUT', 'api/sleeplist/' + sleepId);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	let convertedSleepUpdate = JSON.stringify(sleep);
+	console.log(convertedSleepUpdate);
+	
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			console.log('loud and clear');
@@ -375,7 +383,8 @@ function putSleepEntry(sleep) {
 				getAllSleep();
 				console.log('should be displayed');
 			}
-		} else {
+		} 
+		else {
 			console.log("The update was unsuccessful.");
 		}
 	};
