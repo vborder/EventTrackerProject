@@ -6,80 +6,42 @@
 <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
-<h1>Welcome to SleepTracker</h1>
+	<h1>Welcome to SleepTracker</h1>
 
-<!-- TODO: build basic page structure with container divs etc. -->
-<form name="sleepForm">
-    <input type="number" name="sleepId">
-    <button name="search">Get Sleep by Id</button><button name="listAll">Get all sleep data</button>
-</form>
+	<!-- TODO: build basic page structure with container divs etc. -->
+	<form name="sleepForm">
+		<input type="number" name="sleepId">
+		<button name="search">Get sleep by ID</button>
+		<button name="sleepListTable">Get all sleep data</button>
+	</form>
 
-<form name="newSleepForm">
-    <label for="startSleepTime">Start sleep time</label>
-    <input type="text" name="startSleepTime" placeholder="start sleep time"><br>
+	<form name="newSleepForm">
+		<label for="startSleepTime">Start sleep time</label> <input
+			type="text" name="startSleepTime" placeholder="start sleep time"><br>
 
-    <label for="endSleepTime">End sleep time</label>
-    <input type="text" name="endSleepTime" placeholder="end sleep time"><br>
+		<label for="endSleepTime">End sleep time</label> <input type="text"
+			name="endSleepTime" placeholder="end sleep time"><br> 
+			
+		<label
+			for="sleepLocationTemp">Sleep room temperature</label> <input
+			type="number" name="sleepLocationTemp" placeholder="temperature"><br>
 
-    <label for="sleepLocationTemp">Sleep room temperature</label>
-    <input type="number" name="sleepLocationTemp" placeholder="sleep room temperature"><br>
+		<label for="wakingRestfulness">Restfulness upon waking</label> <label
+			for="1">1</label> <input type="radio" id="1" name="wakingRestfulness"
+			value="1"> <label for="2">2</label> <input type="radio"
+			id="2" name="wakingRestfulness" value="2"> <label for="3">3</label>
+		<input type="radio" id="3" name="wakingRestfulness" value="3">
+		<label for="4">4</label> <input type="radio" id="4"
+			name="wakingRestfulness" value="4"> <label for="5">5</label>
+		<input type="radio" id="5" name="wakingRestfulness" value="5">
+		<input type="submit" name="create" value="Add sleep entry">
+	</form>
+	<br>
 
-    <label for="wakingRestfulness">Restfulness upon waking</label>
-    <label for="1">1</label>
-    <input type="radio" id="1" name="wakingRestfulness" value="1">
-    <label for="2">2</label>
-    <input type="radio" id="2" name="wakingRestfulness" value="2">
-    <label for="3">3</label>
-    <input type="radio" id="3" name="wakingRestfulness" value="3">
-    <label for="4">4</label>
-    <input type="radio" id="4" name="wakingRestfulness" value="4">
-    <label for="5">5</label>
-    <input type="radio" id="5" name="wakingRestfulness" value="5">
-    <input type="submit" name="create" value="Add Sleep">
-</form>
-<br>
-<br>
-<!-- <form name="updatedSleepForm">
-    <label for="startSleepTime">Start sleep time</label>
-    <input type="text" name="startSleepTime" value=><br>
-
-    <label for="endSleepTime">End sleep time</label>
-    <input type="text" name="endSleepTime" value=><br>
-
-    <label for="sleepLocationTemp">Sleep room temperature</label>
-    <input type="number" name="sleepLocationTemp" value=><br>
-
-    <label for="wakingRestfulness">Restfulness upon waking</label>
-    <label for="1">1</label>
-    <input type="radio" id="1" name="wakingRestfulness" value="1">
-    <label for="2">2</label>
-    <input type="radio" id="2" name="wakingRestfulness" value="2">
-    <label for="3">3</label>
-    <input type="radio" id="3" name="wakingRestfulness" value="3">
-    <label for="4">4</label>
-    <input type="radio" id="4" name="wakingRestfulness" value="4">
-    <label for="5">5</label>
-    <input type="radio" id="5" name="wakingRestfulness" value="5">
-    <input type="submit" name="create" value="Add Sleep">
-</form> -->
-
-<!-- <div id="createSleepOutput">
-    <div id="sleepDataEntry"></div>
-</div>
-
-<div id="updateSleep">
-
-</div>
-
-<div id="deleteSleep">
-
-</div> -->
-<div id="Output">
-    <div id="sleepData"></div>
-	<div id="sleepListTable"></div>
-	<div id="errors"></div>
-   <!--  <button name="edit">Edit Sleep Entry</button>
-    <button name="delete">Delete Sleep Entry</button> -->
-</div>
+	<div id="Output">
+		<div id="sleepData"></div>
+		<div id="sleepListTable"></div>
+		<div id="errors"></div>
+	</div>
 </body>
 </html>

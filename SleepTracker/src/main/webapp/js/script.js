@@ -4,7 +4,6 @@ window.addEventListener('load', function() {
 
 function init() {
 	console.log('script.js loaded');
-	getAllSleep();
 	document.sleepForm.search.addEventListener('click', function(e) {
 		e.preventDefault();
 		var sleepId = document.sleepForm.sleepId.value;
@@ -12,6 +11,13 @@ function init() {
 			getSleep(sleepId);
 		}
 	});
+
+	document.sleepForm.sleepListTable.addEventListener('click', function(e) {
+		e.preventDefault();
+		getAllSleep();
+
+	});
+
 	document.newSleepForm.create.addEventListener('click', function(e) {
 		e.preventDefault();
 		createSleepEntry();
@@ -67,26 +73,144 @@ function getSleep(sleepId) {
 }
 
 function displaySleep(sleep) {
+	console.log('displaySleep called')
 	var dataDiv = document.getElementById('sleepData');
 	dataDiv.textContent = '';
-	let sleepStart = document.createElement('h3');
+	
+	let sleepStartHead = document.createElement('h4');
+	sleepStartHead.textContent = 'Sleep start time';
+	dataDiv.appendChild(sleepStartHead);
+	let sleepStart = document.createElement('p');
 	sleepStart.textContent = sleep.startSleepTime;
 	// sleepStart = formatDate(sleepStart);
 	dataDiv.appendChild(sleepStart);
 
-	let sleepEnd = document.createElement('h3');
+	let sleepEndHead = document.createElement('h4');
+	sleepEndHead.textContent = 'Sleep end time';
+	dataDiv.appendChild(sleepEndHead);
+	let sleepEnd = document.createElement('p');
 	sleepEnd.textContent = sleep.endSleepTime;
 	dataDiv.appendChild(sleepEnd);
 
-	let sleepLocationTemp = document.createElement('h4');
+	let sleepLocationTempHead = document.createElement('h4');
+	sleepLocationTempHead.textContent = 'Room temperature (Fahrenheit)';
+	dataDiv.appendChild(sleepLocationTempHead);
+	let sleepLocationTemp = document.createElement('p');
 	sleepLocationTemp.textContent = sleep.sleepLocationTemp;
 	dataDiv.appendChild(sleepLocationTemp);
 
-	let restfulness = document.createElement('h4');
+	let restfulnessHead = document.createElement('h4');
+	restfulnessHead.textContent = 'Restfulness upon waking';
+	dataDiv.appendChild(restfulnessHead);
+	let restfulness = document.createElement('p');
 	restfulness.textContent = sleep.wakingRestfulness;
 	dataDiv.appendChild(restfulness);
+	
+	let enabledHead = document.createElement('h4');
+	enabledHead.textContent = 'Enabled';
+	dataDiv.appendChild(enabledHead);
+	let enabled = document.createElement('p');
+	enabled.textContent = sleep.enabled;
+	dataDiv.appendChild(enabled);
 
+	var button = document.createElement('input');
+	button.name = 'submit';
+	button.type = 'submit';
+	button.value = 'Delete entry';
+	dataDiv.appendChild(button);
+	
+	button.addEventListener('click', function(e) {
+		e.preventDefault();
+		deleteSleepEntry(sleep.id);
+//		console.log(sleep.id);
+	});
+	
+	dynamicForm(sleep);
+	
+	
+	console.log('dynamicForm called');
+	console.log('deleteButton called');
+	
 }
+
+//function deleteButton(sleep) {
+//var button = document.createElement('button');
+//button.name = 'delete';
+//button.type = 'submit';
+//button.value = 'Delete entry';
+//
+//button.addEventListener('click', function(e) {
+//	e.preventDefault();
+//	var button = e.target.parentElement;
+//});
+//}	
+
+//function deleteEntry(sleep) {
+//	console.log('deleteEntry called');
+//	var button = document.createElement('input');
+//	button.name = 'submit';
+//	button.type = 'submit';
+//	button.value = 'Submit update';
+//	
+//	button.addEventListener('click', function(e) {
+//		e.preventDefault();
+//		deleteSleepEntry(sleep.id);
+//	});
+//	
+//}
+
+function dynamicForm(sleep) {
+	console.log('dynamicForm called')
+	var form = document.createElement('form');
+	form.name = 'updatedSleepForm';
+	
+	var dynHeading = document.createElement('h3');
+	dynHeading.textContent = 'Update this entry';
+	form.appendChild(dynHeading);
+	var br = document.createElement('br');
+		
+	var startSleepTime = document.createElement('input');
+	startSleepTime.name = 'startSleepTime';
+	startSleepTime.type = 'text';
+	startSleepTime.placeholder = 'start sleep time';
+	form.appendChild(startSleepTime);
+	
+	var endSleepTime = document.createElement('input');
+	endSleepTime.name = 'endSleepTime';
+	endSleepTime.type = 'text';
+	endSleepTime.placeholder = 'end sleep time';
+	form.appendChild(endSleepTime);
+	
+	var sleepLocationTemp = document.createElement('input');
+	sleepLocationTemp.name = 'sleepLocationTemp';
+	sleepLocationTemp.type = 'number';
+	sleepLocationTemp.placeholder = 'room temperature';
+	form.appendChild(sleepLocationTemp);
+	
+	var wakingRestfulness = document.createElement('input');
+	wakingRestfulness.name = 'wakingRestfulness';
+	wakingRestfulness.type = 'number';
+	wakingRestfulness.placeholder = 'from 1-5';
+	form.appendChild(wakingRestfulness);
+	
+	var formSubmit = document.createElement('input');
+	formSubmit.name = 'submit';
+	formSubmit.type = 'submit';
+	formSubmit.value = 'Submit update';
+	
+	formSubmit.addEventListener('click', function(e) {
+		e.preventDefault();
+		var form = e.target.parentElement;
+		console.log(form.startSleepTime.value);
+		updateSleepEntry(sleep);
+		form.reset();
+	});
+	
+	form.appendChild(formSubmit);
+	document.body.appendChild(form);
+	
+}
+
 
 function displayError(message) {
 	var dataDiv = document.getElementById('sleepData');
@@ -110,14 +234,41 @@ function displayError(message) {
 
 function createSleepEntry() {
 	console.log('createSleepEntry called');
-	let form = document.newSleepForm;
+	let form = document.updatedSleepForm;
 	let sleepEntry = {};
-	sleepEntry.startSleeptime = form.startSleepTime.value;
+	sleepEntry.startSleepTime = form.startSleepTime.value;
 	sleepEntry.endSleepTime = form.endSleepTime.value;
 	sleepEntry.sleepLocationTemp = form.sleepLocationTemp.value;
 	sleepEntry.wakingRestfulness = form.wakingRestfulness.value;
 	console.log(sleepEntry);
 	postSleepEntry(sleepEntry);
+}
+
+function postSleepEntry(sleepEntry) {
+	console.log(sleepEntry)
+	let sleepJson = JSON.stringify(sleepEntry);
+	console.log(sleepJson);
+
+	let xhr = new XMLHttpRequest();
+	let uri = "api/sleeplist";
+	xhr.open("POST", uri);
+	xhr.setRequestHeader('Content-type', 'application/json');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200 || xhr.status === 201) {
+				let createdSleepEntry = JSON.parse(xhr.responseText);
+				displaySleep(createdSleepEntry);
+			} else {
+				if (xhr.status === 400) {
+					displayError(`Invalid sleep data, unable to create entry from <pre>${sleepJson}</pre>`);
+				} else {
+					displayError('Unknown error creating sleep entry: '
+							+ xhr.status);
+				}
+			}
+		}
+	};
+	xhr.send(sleepJson);
 }
 
 function populateSleepTable(allSleepEntries) {
@@ -127,10 +278,10 @@ function populateSleepTable(allSleepEntries) {
 	divSleepTable.appendChild(sleepTable);
 	let sleepRow = document.createElement('tr');
 	divSleepTable.appendChild(sleepRow);
-//	let sleepHeadingMain = document.createElement('th');
-//	divSleepTable.appendChild(sleepHeadingMain);
-//	divSleepTable.appendChild(sleepRow);
-//	sleepHeadingMain.textContent = 'All Sleep Entries';
+	// let sleepHeadingMain = document.createElement('th');
+	// divSleepTable.appendChild(sleepHeadingMain);
+	// divSleepTable.appendChild(sleepRow);
+	// sleepHeadingMain.textContent = 'All Sleep Entries';
 	let sleepHeadingId = document.createElement('th');
 	sleepHeadingId.textContent = 'ID';
 	divSleepTable.appendChild(sleepHeadingId);
@@ -163,66 +314,66 @@ function populateSleepTable(allSleepEntries) {
 		let sleepRowRest = document.createElement('td');
 		sleepRowRest.textContent = allSleepEntries[i].wakingRestfulness;
 		divSleepTable.appendChild(sleepRowRest);
-		
+
 		sleepId.addEventListener('click', function(e) {
 			e.preventDefault();
 			getSleep(allSleepEntries[i].id);
+			
+		});
+		
+		sleepRowStart.addEventListener('click', function(e) {
+			e.preventDefault();
+			getSleep(allSleepEntries[i].startSleepTime);
+		});
+		
+		sleepRowStart.addEventListener('click', function(e) {
+			e.preventDefault();
+			getSleep(allSleepEntries[i].endSleepTime);
+		});
+		
+		sleepRowTemp.addEventListener('click', function(e) {
+			e.preventDefault();
+			getSleep(allSleepEntries[i].sleepLocationTemp);
+		});
+		
+		sleepRowRest.addEventListener('click', function(e) {
+			e.preventDefault();
+			getSleep(allSleepEntries[i].wakingRestfulness);
 		});
 
 	}
 
 }
 
-function updateSleepEntry(sleepId) {
-	console.log('updateSleepEntry called');
+function updateSleepEntry() {
+	console.log('in updateSleepEntry');
 	let form = document.updatedSleepForm;
 	let updatedEntry = {};
-	updatedEntry.id = form.id.value;
-	updatedEntry.StartSleepTime = form.startSleepTime.value;
+	updatedEntry.sleepId = form.sleepId.value;
+	updatedEntry.startSleepTime = form.startSleepTime.value;
 	updatedEntry.endSleepTime = form.endSleepTime.value;
 	updatedEntry.sleepLocationTemp = form.sleepLocationTemp.value;
 	updatedEntry.wakingRestfulness = form.wakingRestfulness.value;
-	console.log('updateSleepEntry(): ');
+	updatedEntry.enabled = form.enabled.value;
 	console.log(updatedEntry);
-	postSleepEntry(updatedEntry);
+	console.lo
+	putSleepEntry(updatedEntry);
 }
 
-function postSleepEntry(sleepEntry) {
-	console.log(sleepEntry)
-	let sleepJson = JSON.stringify(sleepEntry);
-	console.log(sleepJson);
-
+function putSleepEntry(sleep) {
+	console.log('in putSleepEntry');
 	let xhr = new XMLHttpRequest();
-	let uri = "api/sleeplist";
-	xhr.open("POST", uri);
-	xhr.setRequestHeader('Content-type', 'application/json');
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200 || xhr.status === 201) {
-				let createdSleepEntry = JSON.parse(xhr.responseText);
-				displaySleep(createdSleepEntry);
-			} else {
-				if (xhr.status === 400) {
-					displayError(`Invalid sleep data, unable to create entry from <pre>${sleepJson}</pre>`);
-				} else {
-					displayError('Unknown error creating sleep entry: '
-							+ xhr.status);
-				}
-			}
-		}
-	};
-	xhr.send(sleepJson);
-}
-
-function putSleepEntry(sleepId, sleep) {
-	let xhr = new XMLHttpRequest();
-	xhr.open("PUT", "api/sleeplist/" + sleepId);
+	xhr.open('PUT', 'api/sleeplist/' + sleepId);
 	xhr.setRequestHeader('Content-type', 'application/json');
 	let convertedSleepUpdate = JSON.stringify(sleep);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
+			console.log('loud and clear');
 			if (xhr.status === 200 || xhr.status === 201) {
+				console.log('status good');
 				let updatedSleep = JSON.parse(xhr.responseText);
+				getAllSleep();
+				console.log('should be displayed');
 			}
 		} else {
 			console.log("The update was unsuccessful.");
@@ -232,19 +383,24 @@ function putSleepEntry(sleepId, sleep) {
 }
 
 function deleteSleepEntry(sleepId) {
-	let hr = new XMLHttpRequest();
+	console.log('in deleteSleepEntry');
+	let xhr = new XMLHttpRequest();
 	xhr.open('DELETE', 'api/sleeplist/' + sleepId);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
+			console.log('loud and clear');
 			if (xhr.status === 204) {
+				console.log('status good');
+				populateSleepTable(allSleepEntries);
+				console.log('table populated?');
+				getAllSleep();
+				console.log('should be displayed');
 			}
 		} else {
 			if (xhr.status === 404) {
 				displayError('Unknown error deleting sleep entry: '
 						+ xhr.status);
 			}
-
 		}
 	}
-
 }
