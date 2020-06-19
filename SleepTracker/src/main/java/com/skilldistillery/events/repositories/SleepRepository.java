@@ -9,6 +9,6 @@ import com.skilldistillery.events.entities.Sleep;
 public interface SleepRepository extends JpaRepository<Sleep, Integer> {
 	
 	Sleep findSleepById(int sleepId);
-//	List<Sleep> findEnabledSleep();
+
 
 }

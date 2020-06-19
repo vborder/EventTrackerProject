@@ -20,9 +20,6 @@ public class SleepServiceImpl implements SleepService {
 		return repo.findAll();
 	}
 	
-//	public List<Sleep> findEnabledSleep() {
-//		return repo.findEnabledSleep(true);
-//	}
 
 	@Override
 	public Sleep findSleepById(int sleepId) {
@@ -57,19 +54,14 @@ public class SleepServiceImpl implements SleepService {
 	@Override
 	public boolean deleteById(int sleepId) {
 		boolean deleted = false;
-		
-		Optional<Sleep> sleepOpt = repo.findById(sleepId);
-		
-		if (sleepOpt.isPresent()) {
-			Sleep sleep = sleepOpt.get();
-			sleep.setEnabled(false);
-			repo.saveAndFlush(sleep);
+		try {
+			repo.deleteById(sleepId);
 			deleted = true;
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
 		return deleted;
+		
 	}
 	
-	
-
 }

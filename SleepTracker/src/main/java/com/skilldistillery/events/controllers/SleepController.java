@@ -75,7 +75,7 @@ public class SleepController {
 	}
 
 	@DeleteMapping("sleeplist/{sleepId}")
-	public void deleteById(@PathVariable Integer sleepId, HttpServletResponse response) {
+	public void deleteById(@PathVariable int sleepId, HttpServletResponse response) {
 
 		if (sleepSvc.deleteById(sleepId)) {
 			response.setStatus(204);

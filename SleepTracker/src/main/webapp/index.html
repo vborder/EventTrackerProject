@@ -6,15 +6,22 @@
 <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
-	<h1>Welcome to SleepTracker</h1>
 
+	<h1>Welcome to SleepTracker</h1>
+<div id="sleepListTable"></div>
+<div id="averageDiv"></div>
+<div id="dynamicForm"></div>
+<div id="sleepData"></div>
+<!-- <div id="errors"></div> -->
+<!-- <div id="forms"> -->
 	<!-- TODO: build basic page structure with container divs etc. -->
 	<form name="sleepForm">
 		<input type="number" name="sleepId">
 		<button name="search">Get sleep by ID</button>
-		<button name="sleepListTable">Get all sleep data</button>
+		<button name="sleepListTable">Get all sleep data</button><br>
 	</form>
-
+	
+<h2>Add new sleep session</h2>
 	<form name="newSleepForm">
 		<label for="startSleepTime">Start sleep time</label> <input
 			type="text" name="startSleepTime" placeholder="start sleep time"><br>
@@ -34,14 +41,10 @@
 		<label for="4">4</label> <input type="radio" id="4"
 			name="wakingRestfulness" value="4"> <label for="5">5</label>
 		<input type="radio" id="5" name="wakingRestfulness" value="5">
+		
 		<input type="submit" name="create" value="Add sleep entry">
 	</form>
-	<br>
+</div>
 
-	<div id="Output">
-		<div id="sleepData"></div>
-		<div id="sleepListTable"></div>
-		<div id="errors"></div>
-	</div>
 </body>
 </html>

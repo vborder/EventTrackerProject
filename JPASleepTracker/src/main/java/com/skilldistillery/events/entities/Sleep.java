@@ -30,20 +30,17 @@ public class Sleep {
 	
 	@Column(name="restfulness_upon_waking")
 	private Integer wakingRestfulness;
-	
-	private boolean enabled;
 
 	public Sleep(int id, Double sleepLocationTemp, LocalDateTime startSleepTime, LocalDateTime endSleepTime,
-			Integer wakingRestfulness, boolean enabled) {
+			Integer wakingRestfulness) {
 		super();
 		this.id = id;
 		this.sleepLocationTemp = sleepLocationTemp;
 		this.startSleepTime = startSleepTime;
 		this.endSleepTime = endSleepTime;
 		this.wakingRestfulness = wakingRestfulness;
-		this.enabled = enabled;
 	}
-	
+
 	public Sleep() {
 		super();
 	}
@@ -51,11 +48,11 @@ public class Sleep {
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Double getSleepLocationTemp() {
 		return sleepLocationTemp;
 	}
@@ -88,14 +85,6 @@ public class Sleep {
 		this.wakingRestfulness = wakingRestfulness;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -121,8 +110,9 @@ public class Sleep {
 	@Override
 	public String toString() {
 		return "Sleep [id=" + id + ", sleepLocationTemp=" + sleepLocationTemp + ", startSleepTime=" + startSleepTime
-				+ ", endSleepTime=" + endSleepTime + ", wakingRestfulness=" + wakingRestfulness + ", enabled=" + enabled
-				+ "]";
+				+ ", endSleepTime=" + endSleepTime + ", wakingRestfulness=" + wakingRestfulness + "]";
 	}
+	
+	
 
 }
