@@ -127,7 +127,7 @@ function dynamicForm(sleep) {
 	form.appendChild(sleepId);
 
 	var dynHeading = document.createElement('h3');
-	dynHeading.textContent = 'Update this entry';
+	dynHeading.textContent = 'Update or Delete this entry';
 	form.appendChild(dynHeading);
 
 	var startSleepTime = document.createElement('input');
@@ -198,7 +198,7 @@ function displayError(message) {
 
 function createSleepEntry() {
 	console.log('createSleepEntry called');
-	let form = document.updatedSleepForm;
+	let form = document.newSleepForm;
 	let sleepEntry = {};
 	sleepEntry.startSleepTime = form.startSleepTime.value;
 	sleepEntry.endSleepTime = form.endSleepTime.value;
@@ -209,7 +209,7 @@ function createSleepEntry() {
 }
 
 function postSleepEntry(sleepEntry) {
-	console.log(sleepEntry)
+	console.log('in postSleepEntry');
 	let sleepJson = JSON.stringify(sleepEntry);
 	console.log(sleepJson);
 
