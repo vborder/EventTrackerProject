@@ -1,6 +1,6 @@
 
-<form *ngIf="selected">
-New Sleep Entry
+<form *ngIf="!selected">
+<h3>New Sleep Entry</h3>
 <input type="hidden" name="id" placeholder="ID" [(ngModel)]="newSleep.id"><br>
 <input type="number" name="sleepLocationTemp" placeholder="room temperature" [(ngModel)]="newSleep.sleepLocationTemp"><br>
 <input type="text" name="startSleepTime" placeholder="start sleep" [(ngModel)]="newSleep.startSleepTime"><br>
@@ -39,12 +39,13 @@ New Sleep Entry
   </tbody>
 </table>
 </div>
-<form *ngIf='editSleep'>
+<form *ngIf='editSleep' ngForm>
+  <h3>Update</h3>
 <input type="hidden" name="id" placeholder="ID" [(ngModel)]="editSleep.id"><br>
-<input type="number" name="sleepLocationTemp" placeholder="room temperature" [(ngModel)]="editSleep.sleepLocationTemp"><br>
-<input type="text" name="startSleepTime" placeholder="start sleep" [(ngModel)]="editSleep.startSleepTime"><br>
-<input type="text" name="endSleepTime" placeholder="end sleep" [(ngModel)]="editSleep.endSleepTime"><br>
-<input type="text" name="endSleepTime" placeholder="rate from 1-5 " [(ngModel)]="editSleep.wakingRestfulness"><br>
+<input type="number" name="sleepLocationTemp" placeholder="room temperature" [(ngModel)]="editSleep.sleepLocationTemp" ngForm><br>
+<input type="text" name="startSleepTime" placeholder="start sleep" [(ngModel)]="editSleep.startSleepTime" ngForm><br>
+<input type="text" name="endSleepTime" placeholder="end sleep" [(ngModel)]="editSleep.endSleepTime" ngForm><br>
+<input type="text" name="endSleepTime" placeholder="rate from 1-5 " [(ngModel)]="editSleep.wakingRestfulness" ngForm><br>
 <button type="button" (click)="editSleep = null">Cancel</button>
   <button type="button" (click)="updateSleep(editSleep)">Save</button>
 </form>
