@@ -1,0 +1,50 @@
+
+<form *ngIf="selected">
+New Sleep Entry
+<input type="hidden" name="id" placeholder="ID" [(ngModel)]="newSleep.id"><br>
+<input type="number" name="sleepLocationTemp" placeholder="room temperature" [(ngModel)]="newSleep.sleepLocationTemp"><br>
+<input type="text" name="startSleepTime" placeholder="start sleep" [(ngModel)]="newSleep.startSleepTime"><br>
+<input type="text" name="endSleepTime" placeholder="end sleep" [(ngModel)]="newSleep.endSleepTime"><br>
+<input type="text" name="endSleepTime" placeholder="rate from 1-5 " [(ngModel)]="newSleep.wakingRestfulness"><br>
+<button (click)="create()">Create entry</button>
+</form>
+<br>
+<div>
+  <h1>My Sleep </h1>
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#ID</th>
+      <th scope="col">Sleep Start Time</th>
+      <th scope="col">Sleep End Time</th>
+      <th scope="col">Room Temperature (upon waking)</th>
+      <th scope="col">Rate Restfulness (upon waking)</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let sleep of sleep">
+      <!-- <h1>{{sleep.id}}</h1> -->
+      <th scope="row">{{sleep.id}}</th>
+      <!-- <td>{{sleep.id}}</td> -->
+      <td>{{sleep.startSleepTime}}</td>
+      <td>{{sleep.endSleepTime}}</td>
+      <td>{{sleep.sleepLocationTemp}}</td>
+      <td>{{sleep.wakingRestfulness}}</td>
+      <td>
+        <button type="button" (click)="setEditSleep(sleep)">Update</button>
+        <button type="button" (click)="deleteSleep(sleep.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<form *ngIf='editSleep'>
+<input type="hidden" name="id" placeholder="ID" [(ngModel)]="editSleep.id"><br>
+<input type="number" name="sleepLocationTemp" placeholder="room temperature" [(ngModel)]="editSleep.sleepLocationTemp"><br>
+<input type="text" name="startSleepTime" placeholder="start sleep" [(ngModel)]="editSleep.startSleepTime"><br>
+<input type="text" name="endSleepTime" placeholder="end sleep" [(ngModel)]="editSleep.endSleepTime"><br>
+<input type="text" name="endSleepTime" placeholder="rate from 1-5 " [(ngModel)]="editSleep.wakingRestfulness"><br>
+<button type="button" (click)="editSleep = null">Cancel</button>
+  <button type="button" (click)="updateSleep(editSleep)">Save</button>
+</form>
