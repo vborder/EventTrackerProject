@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   sleep: Sleep[] = [];
   selected: Sleep = null;
   editSleep: Sleep = null;
+  average = null;
+  // sleep = [];
 
   constructor(private sleepService: SleepService, private router: Router) { }
 
@@ -58,7 +60,6 @@ export class HomeComponent implements OnInit {
   updateSleep(sleep: Sleep) {
     console.log('In homeComponentUpdate');
     console.log(sleep.id);
-
 
     this.sleepService.update(sleep).subscribe(
       updated => {
@@ -105,6 +106,26 @@ export class HomeComponent implements OnInit {
         console.error(fail);
       }
     );
+  }
+
+  restRating() {
+    // tslint:disable-next-line: prefer-for-of
+    let average = 0;
+    let total = 0;
+    for (let i = 0; i < this.sleep.length; i++) {
+      total += this.sleep[i].wakingRestfulness;
+      console.log(this.sleep[i].wakingRestfulness);
+      console.log(total);
+
+      average = total / this.sleep.length;
+      average = Math.floor(average);
+      // this.average = average;
+      console.log('Is average showing? ' + average);
+
+      // return average;
+
+    }
+    return average;
   }
 
 }
