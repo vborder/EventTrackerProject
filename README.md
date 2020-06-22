@@ -8,7 +8,7 @@ SleepTracker is a Spring REST CRUD API that tracks a user's sleeping hours and q
 
 ## How to Use
 
-Upon navigating to the site, the user is presented with all their previous sleep entries and the option to enter a new sleep entry. The user then has the option to update this information or delete the entry from the list. All changes in table data should appear instantly on the same page, but sometimes a refresh of the page and a new retrieval is required.
+Upon navigating to the site, the user is presented with all their previous sleep entries and the option to enter a new sleep entry. The user then has the option to update this information or delete the entry from the list. All changes in table data should appear instantly on the same page.
 
 Information on the average restfulness upon waking is also presented at the bottom of the all results table.
 
